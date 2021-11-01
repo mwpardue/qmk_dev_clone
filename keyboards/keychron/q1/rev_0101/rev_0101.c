@@ -15,6 +15,7 @@
  */
 
 #include "quantum.h"
+#include "test.c"
 
 const is31_led __flash g_is31_leds[DRIVER_LED_TOTAL] = {
 /* Refer to IS31 manual for these locations
