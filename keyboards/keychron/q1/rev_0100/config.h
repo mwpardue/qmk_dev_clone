@@ -16,10 +16,9 @@
 
 #pragma once
 
-
 /* USB Device descriptor parameter */
 #define PRODUCT_ID      0x0100
-#define DEVICE_VER      0x0100
+#define DEVICE_VER      0x0105
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS { D3, D2, B3, B2, B1, B0 }
