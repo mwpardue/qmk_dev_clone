@@ -21,6 +21,9 @@
 
 #if defined(EEPROM_EMU_STM32F103xB)
 #    define FLASH_SR_WRPERR FLASH_SR_WRPRTERR
+#elif defined(EEPROM_EMU_STM32L432xB)
+#    define FLASH_SR_PGERR FLASH_SR_PROGERR
+#    define FLASH_OBR_OPTERR FLASH_SR_OPERR
 #endif
 
 /* Delay definition */
@@ -90,14 +93,23 @@ FLASH_Status FLASH_ErasePage(uint32_t Page_Address) {
     FLASH_Status status = FLASH_COMPLETE;
     /* Check the parameters */
     ASSERT(IS_FLASH_ADDRESS(Page_Address));
+    #if defined(EEPROM_EMU_STM32L432xB)
+        uint32_t Page_Address_index = (Page_Address - FLASH_BASE) / 0x800;
+    #endif
     /* Wait for last operation to be completed */
     status = FLASH_WaitForLastOperation(EraseTimeout);
 
     if (status == FLASH_COMPLETE) {
         /* if the previous operation is completed, proceed to erase the page */
-        FLASH->CR |= FLASH_CR_PER;
-        FLASH->AR = Page_Address;
-        FLASH->CR |= FLASH_CR_STRT;
+        #if defined(EEPROM_EMU_STM32L432xB)
+            MODIFY_REG(FLASH->CR, FLASH_CR_PNB, ((Page_Address_index & 0xFFU) << FLASH_CR_PNB_Pos));
+            SET_BIT(FLASH->CR, FLASH_CR_PER);
+            SET_BIT(FLASH->CR, FLASH_CR_STRT);
+        #else
+            FLASH->CR |= FLASH_CR_PER;
+            FLASH->AR = Page_Address;
+            FLASH->CR |= FLASH_CR_STRT;
+        #endif
 
         /* Wait for last operation to be completed */
         status = FLASH_WaitForLastOperation(EraseTimeout);
@@ -139,6 +151,40 @@ FLASH_Status FLASH_ProgramHalfWord(uint32_t Address, uint16_t Data) {
     }
     return status;
 }
+
+/**
+ * @brief  Programs double words at a specified address.
+ * @param  Address: specifies the address to be programmed.
+ * @param  Data: specifies the data to be programmed.
+ * @retval FLASH Status: The returned value can be: FLASH_ERROR_PG,
+ *   FLASH_ERROR_WRP, FLASH_COMPLETE or FLASH_TIMEOUT.
+ */
+ #if defined(EEPROM_EMU_STM32L432xB)
+    FLASH_Status FLASH_ProgramDoubleWord(uint32_t Address, uint64_t Data) {
+        FLASH_Status status = FLASH_BAD_ADDRESS;
+
+        if (IS_FLASH_ADDRESS(Address)) {
+            /* Wait for last operation to be completed */
+            status = FLASH_WaitForLastOperation(ProgramTimeout);
+            if (status == FLASH_COMPLETE) {
+                /* if the previous operation is completed, proceed to program the new data */
+                //FLASH->CR |= FLASH_CR_PG;
+                SET_BIT(FLASH->CR, FLASH_CR_PG);
+                *(__IO uint32_t*)Address = (uint32_t)Data;
+                __ISB();
+                *(__IO uint32_t*)(Address+4U) = (uint32_t)(Data >> 32);
+                /* Wait for last operation to be completed */
+                status = FLASH_WaitForLastOperation(ProgramTimeout);
+                if (status != FLASH_TIMEOUT) {
+                    /* if the program operation is completed, disable the PG Bit */
+                    CLEAR_BIT(FLASH->CR, FLASH_CR_PG);
+                }
+                FLASH->SR = (FLASH_SR_EOP | FLASH_SR_PGERR | FLASH_SR_WRPERR);
+            }
+        }
+        return status;
+    }
+#endif
 
 /**
  * @brief  Unlocks the FLASH Program Erase Controller.
