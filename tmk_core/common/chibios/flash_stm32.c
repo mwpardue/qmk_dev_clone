@@ -24,6 +24,8 @@
 #elif defined(EEPROM_EMU_STM32L432xB)
 #    define FLASH_SR_PGERR FLASH_SR_PROGERR
 #    define FLASH_OBR_OPTERR FLASH_SR_OPERR
+#    define FLASH_KEY1 0x45670123U
+#    define FLASH_KEY2 0xCDEF89ABU
 #endif
 
 /* Delay definition */

@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2018-2021 Harrison Chan (@Xelus)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,17 +14,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+/* Address for jumping to bootloader on STM32 chips. */
+/* It is chip dependent, the correct number can be looked up by checking against ST's application note AN2606.
+ */
+#define STM32_BOOTLOADER_ADDRESS 0x1FFF0000
 
-/* USB Device descriptor parameter */
-#define PRODUCT_ID      0x0102
-#define DEVICE_VER      0x0101
+#define PAL_STM32_OSPEED_HIGHEST PAL_STM32_OSPEED_HIGH
 
-/* key matrix pins */
-#define MATRIX_ROW_PINS { D3, D2, B3, B2, B1, B0 }
-#define MATRIX_COL_PINS { D5, D4, D6, D7, B4, B5, B6, C6, C7, F7, F6, F5, F4, F1, F0 }
-
-/* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 59
-#define DRIVER_2_LED_TOTAL 24
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+#ifndef EARLY_INIT_PERFORM_BOOTLOADER_JUMP
+#    define EARLY_INIT_PERFORM_BOOTLOADER_JUMP TRUE
+#endif

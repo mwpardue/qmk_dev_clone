@@ -17,14 +17,14 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define PRODUCT_ID      0x0102
-#define DEVICE_VER      0x0101
+#define PRODUCT_ID      0x0112
+#define DEVICE_VER      0x0100
 
 /* key matrix pins */
-#define MATRIX_ROW_PINS { D3, D2, B3, B2, B1, B0 }
-#define MATRIX_COL_PINS { D5, D4, D6, D7, B4, B5, B6, C6, C7, F7, F6, F5, F4, F1, F0 }
+#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
 
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 59
-#define DRIVER_2_LED_TOTAL 24
+#define DRIVER_1_LED_TOTAL 34
+#define DRIVER_2_LED_TOTAL 34
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)

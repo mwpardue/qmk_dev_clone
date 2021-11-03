@@ -23,7 +23,6 @@
 
 #pragma once
 
-
 typedef unsigned long long    uint64_t;
 
 uint16_t EEPROM_Init(void);

@@ -83,24 +83,24 @@
  * === WRITE LOG ENTRY FORMATS ===
  *
  * ╔════════════════ Byte-Entry ═══════════════╗
- * ║F F F F F 1    X X   ║F F F F F F     Y Y  ║
- * ║          │    └┬┘   ║                └┬┘  ║
- * ║          │ Address  ║                 │   ║
- * ║          └─Byte-Flag║              ~Value ║
+ * ║ FF FF F1 X X X X    ║ FF FF FF        Y Y ║
+ * ║        │ └──┬──┘    ║                 └┬┘ ║
+ * ║        │ Address    ║                  │  ║
+ * ║        └─Byte-Flag  ║               ~Value║
  * ╚═════════════════════╩═════════════════════╝
  *
  * ╔════════════════ Word-Entry ═══════════════╗
- * ║F F F F F 2    X X   ║F F F F     Y Y Y Y  ║
- * ║          │    └┬┘   ║            └──┬──┘  ║
- * ║          │ Address  ║               │     ║
- * ║          └─Byte-Flag║            ~Value   ║
+ * ║ FF FF F2 X X X X    ║ FF FF       Y Y Y Y ║
+ * ║        │ └──┬──┘    ║             └──┬──┘ ║
+ * ║        │ Address    ║                │    ║
+ * ║        └─Byte-Flag  ║             ~Value  ║
  * ╚═════════════════════╩═════════════════════╝
  *
  * ╔═══════════════ DWord-Entry ═══════════════╗
- * ║F F F F F 4    X X   ║Y Y Y Y     Y Y Y Y  ║
- * ║          │    └┬┘   ║└────────┬────────┘  ║
- * ║          │ Address  ║         │           ║
- * ║          └─Byte-Flag║      ~Value         ║
+ * ║ FF FF F4 X X X X    ║ Y Y Y Y     Y Y Y Y ║
+ * ║        │ └──┬──┘    ║ └────────┬────────┘ ║
+ * ║        │ Address    ║          │          ║
+ * ║        └─Byte-Flag  ║       ~Value        ║
  * ╚═════════════════════╩═════════════════════╝
  *
  */
