@@ -15,9 +15,9 @@
  */
 
 #include "quantum.h"
+#include "test.c"
 
-
-const ckled_led __flash g_ckled_leds[DRIVER_LED_TOTAL] = {
+const ckled2001_led __flash g_ckled2001_leds[DRIVER_LED_TOTAL] = {
 /* Refer to IS31 manual for these locations
  *   driver
  *   |  R location

@@ -36,21 +36,7 @@
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
 
-/* Setting number of scan phase in one frame
- * SP    Scan Phase Setting
- * 0x00  Scan phase is CB1 ~ CB12, 1/12.
- * 0x01  Scan phase is CB1 ~ CB11, 1/11, CB12 no-active.
- * 0x02  Scan phase is CB1 ~ CB10, 1/10, CB11~CB12 no-active.
- * 0x03  Scan phase is CB1 ~ CB9,  1/9,  CB10~CB12 no-active.
- * 0x04  Scan phase is CB1 ~ CB8,  1/8,  CB9~CB12 no-active.
- * 0x05  Scan phase is CB1 ~ CB7,  1/7,  CB8~CB12 no-active.
- * 0x06  Scan phase is CB1 ~ CB6,  1/6,  CB7~CB12 no-active.
- * 0x07  Scan phase is CB1 ~ CB5,  1/5,  CB6~CB12 no-active.
- * 0x08  Scan phase is CB1 ~ CB4,  1/4,  CB5~CB12 no-active.
- * 0x09  Scan phase is CB1 ~ CB3,  1/3,  CB4~CB12 no-active.
- * 0x0A  Scan phase is CB1 ~ CB2,  1/2,  CB3~CB12 no-active.
- * 0x0B  Scan phase is only CB1,   1/1,  CB2~CB12 no-active.
- */
+/* Setting number of scan phase in one frame */
 #define PHASE_CHANNEL 0x03
 
 /* DIP switch */
@@ -80,6 +66,9 @@
 #define DISABLE_RGB_MATRIX_HUE_BREATHING
 #define DISABLE_RGB_MATRIX_HUE_PENDULUM
 #define DISABLE_RGB_MATRIX_HUE_WAVE
+
+/* Support 5 dynamic keymap layers for VIA */
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
 #define BOOTMAGIC_LITE_ROW 4
 #define BOOTMAGIC_LITE_COLUMN 5

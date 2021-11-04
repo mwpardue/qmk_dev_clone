@@ -3,7 +3,7 @@
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
     "layouts": {
-        "LAYOUT_iso_68": {
+        "LAYOUT_ansi_": {
             "layout": [
             {"label":"Insert", "x":15.25, "y":0},
 
@@ -35,6 +35,7 @@
             {"label":"P", "x":10.5, "y":1.25},
             {"label":"{", "x":11.5, "y":1.25},
             {"label":"}", "x":12.5, "y":1.25},
+            {"label":"|", "x":13.5, "y":1.25, "w":1.5},
             {"label":"Delete", "x":15.25, "y":1.25},
 
             {"label":"Caps Lock", "x":0, "y":2.25, "w":1.75},
@@ -49,12 +50,10 @@
             {"label":"L", "x":9.75, "y":2.25},
             {"label":":", "x":10.75, "y":2.25},
             {"label":"\"", "x":11.75, "y":2.25},
-            {"label":"#~", "x":12.75, "y":2.25},
-            {"label":"Enter", "x":13.75, "y":2.25, "w":1.25}
+            {"label":"Enter", "x":12.75, "y":2.25, "w":2.25},
             {"label":"Home", "x":15.25, "y":2.25},
 
-            {"label":"Shift", "x":0, "y":3.25, "w":1.25},
-            {"label":"|", "x":1.25, "y":3.25},
+            {"label":"Shift", "x":0, "y":3.25, "w":2.25},
             {"label":"Z", "x":2.25, "y":3.25},
             {"label":"X", "x":3.25, "y":3.25},
             {"label":"C", "x":4.25, "y":3.25},

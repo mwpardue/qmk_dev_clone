@@ -1,3 +1,5 @@
+#include "eeconfig.h"
+
 #define MAC_FN 1
 #define WIN_FN 3
 
@@ -172,6 +174,7 @@ void led_test(uint8_t color) {
 }
 
 void clear_eeprom(void) {
+    eeconfig_init();
     #ifdef VIA_ENABLE
         // This resets the layout options
         via_set_layout_options(VIA_EEPROM_LAYOUT_OPTIONS_DEFAULT);
