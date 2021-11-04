@@ -15,7 +15,7 @@
  */
 
 #include "q1.h"
-
+#include "test.c"
 
 const matrix_row_t matrix_mask[] = {
     0b0111111111111101,
