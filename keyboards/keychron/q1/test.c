@@ -148,6 +148,7 @@ void matrix_scan_kb(void) {
         default:
             break;
     }
+        matrix_scan_user();
 }
 
 void led_test(uint8_t color) {

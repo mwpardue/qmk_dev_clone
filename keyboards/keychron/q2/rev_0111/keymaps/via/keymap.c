@@ -15,7 +15,6 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "action.h"
 
 enum layers{
     MAC_BASE,
@@ -35,7 +34,6 @@ enum custom_keycodes {
 #define KC_FLXP LGUI(KC_E)
 #define KC_MCTL KC_MISSION_CONTROL
 #define KC_LPAD KC_LAUNCHPAD
-#define IS_RGB_MATRIX(code) (RGB_TOG <= (code) && (code) <= RGB_MODE_RGBTEST)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_all(
@@ -74,36 +72,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS)
 };
 
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) { /* First encoder */
-        if (clockwise) {
-            if (IS_ANY(dynamic_keymap_get_keycode(biton32(layer_state), 4, 8))) {
-                tap_code_delay(dynamic_keymap_get_keycode(biton32(layer_state), 4, 8), 10);
-            }
-            else if (IS_RGB_MATRIX(dynamic_keymap_get_keycode(biton32(layer_state), 4, 8))) {
-                keyrecord_t record;
-                record.event.key.col = 8;
-                record.event.key.row = 4;
-                record.event.pressed = true;
-                record.event.time = timer_read();
-                process_record(&record);
-            }
-        } else {
-            if(IS_ANY(dynamic_keymap_get_keycode(biton32(layer_state), 4, 7))) {
-                tap_code_delay(dynamic_keymap_get_keycode(biton32(layer_state), 4, 7), 10);
-            }
-            else if (IS_RGB_MATRIX(dynamic_keymap_get_keycode(biton32(layer_state), 4, 7))) {
-                keyrecord_t record;
-                record.event.key.col = 7;
-                record.event.key.row = 4;
-                record.event.pressed = true;
-                record.event.time = timer_read();
-                process_record(&record);
-            }
+#if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
+
+#define ENCODERS 1
+static uint8_t  encoder_state[ENCODERS] = {0};
+static keypos_t encoder_cw[ENCODERS]    = {{ 8, 4 }};
+static keypos_t encoder_ccw[ENCODERS]  = {{ 7, 4 }};
+
+void encoder_action_register(uint8_t index, bool clockwise) {
+    keyevent_t encoder_event = (keyevent_t) {
+        .key = clockwise ? encoder_cw[index] : encoder_ccw[index],
+        .pressed = true,
+        .time = (timer_read() | 1)
+    };
+    encoder_state[index] = (clockwise ^ 1) | (clockwise << 1);
+    action_exec(encoder_event);
+}
+
+void encoder_action_unregister(void) {
+    for (int index = 0; index < ENCODERS; ++index) {
+        if (encoder_state[index]) {
+            keyevent_t encoder_event = (keyevent_t) {
+                .key = encoder_state[index] >> 1 ? encoder_cw[index] : encoder_ccw[index],
+                .pressed = false,
+                .time = (timer_read() | 1)
+            };
+            encoder_state[index] = 0;
+            action_exec(encoder_event);
         }
     }
-    return false;
 }
+
+void matrix_scan_user(void) {
+    encoder_action_unregister();
+}
+
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    encoder_action_register(index, clockwise);
+    return false;
+};
+
+#endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {

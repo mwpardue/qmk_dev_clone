@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
@@ -131,7 +131,7 @@ static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t curre
             // Pin LO, set col bit
             current_matrix[row_index] |= (MATRIX_ROW_SHIFTER << current_col);
             key_pressed = true;
-        } 
+        }
         else
         {
             // Pin HI, clear col bit
