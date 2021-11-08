@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2021 @ Keychron(https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,15 +19,7 @@
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x3434
 #define MANUFACTURER    Keychron
-#define PRODUCT         Keychron Q2
-
-/* key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 15
-
-/* key matrix pins */
-#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
+#define PRODUCT         Keychron C2
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -40,11 +32,8 @@
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
 
-/* Setting number of scan phase in one frame */
-#define PHASE_CHANNEL 0x03
-
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {4,4} }
+#define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -71,8 +60,5 @@
 #define DISABLE_RGB_MATRIX_HUE_PENDULUM
 #define DISABLE_RGB_MATRIX_HUE_WAVE
 
-/* Support 5 dynamic keymap layers for VIA */
-#define DYNAMIC_KEYMAP_LAYER_COUNT 5
-
-#define BOOTMAGIC_LITE_ROW 4
+#define BOOTMAGIC_LITE_ROW 5
 #define BOOTMAGIC_LITE_COLUMN 5

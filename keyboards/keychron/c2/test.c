@@ -1,7 +1,7 @@
 #include "eeconfig.h"
 
-#define _FN1 2
-#define _FN2 3
+#define MAC_FN 1
+#define WIN_FN 3
 
 enum colors{
     WHITE,
@@ -35,8 +35,8 @@ void clear_eeprom(void);
 
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MO(_FN1):
-        case MO(_FN2):
+        case MO(MAC_FN):
+        case MO(WIN_FN):
           if (record->event.pressed) {
              key_press += 1;
              key_count += 1;
@@ -148,7 +148,7 @@ void matrix_scan_kb(void) {
         default:
             break;
     }
-    matrix_scan_user();
+        matrix_scan_user();
 }
 
 void led_test(uint8_t color) {

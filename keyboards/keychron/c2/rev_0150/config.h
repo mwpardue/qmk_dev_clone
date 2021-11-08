@@ -17,17 +17,18 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define PRODUCT_ID      0x0111
+#define PRODUCT_ID      0x0150
 #define DEVICE_VER      0x0100
 
+/* key matrix size */
+#define MATRIX_ROWS 6
+#define MATRIX_COLS 19
+
+/* key matrix pins */
+#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, A2, 0, 0, 0, 0, 0, 0, 0, 0 }
+
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 34
-#define DRIVER_2_LED_TOTAL 33
+#define DRIVER_1_LED_TOTAL 60
+#define DRIVER_2_LED_TOTAL 48
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
-
-/* Encoder used pins */
-#define ENCODERS_PAD_A { A10 }
-#define ENCODERS_PAD_B { B5 }
-
-/* Specifies the number of pulses the encoder registers between each detent */
-#define ENCODER_RESOLUTION 2

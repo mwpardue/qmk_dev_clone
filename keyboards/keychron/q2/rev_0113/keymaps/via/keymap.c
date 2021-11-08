@@ -79,6 +79,16 @@ static uint8_t  encoder_state[ENCODERS] = {0};
 static keypos_t encoder_cw[ENCODERS]    = {{ 8, 4 }};
 static keypos_t encoder_ccw[ENCODERS]  = {{ 7, 4 }};
 
+void encoder_action_register(uint8_t index, bool clockwise) {
+    keyevent_t encoder_event = (keyevent_t) {
+        .key = clockwise ? encoder_cw[index] : encoder_ccw[index],
+        .pressed = true,
+        .time = (timer_read() | 1)
+    };
+    encoder_state[index] = (clockwise ^ 1) | (clockwise << 1);
+    action_exec(encoder_event);
+}
+
 void encoder_action_unregister(void) {
     for (int index = 0; index < ENCODERS; ++index) {
         if (encoder_state[index]) {
@@ -91,16 +101,6 @@ void encoder_action_unregister(void) {
             action_exec(encoder_event);
         }
     }
-}
-
-void encoder_action_register(uint8_t index, bool clockwise) {
-    keyevent_t encoder_event = (keyevent_t) {
-        .key = clockwise ? encoder_cw[index] : encoder_ccw[index],
-        .pressed = true,
-        .time = (timer_read() | 1)
-    };
-    encoder_state[index] = (clockwise ^ 1) | (clockwise << 1);
-    action_exec(encoder_event);
 }
 
 void matrix_scan_user(void) {
