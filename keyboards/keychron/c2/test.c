@@ -1,7 +1,7 @@
 #include "eeconfig.h"
 
-#define MAC_FN 1
 #define WIN_FN 3
+#define MAC_FN 1
 
 enum colors{
     WHITE,

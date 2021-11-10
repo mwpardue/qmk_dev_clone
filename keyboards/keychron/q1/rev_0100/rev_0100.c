@@ -16,6 +16,16 @@
 
 #include "quantum.h"
 
+const matrix_row_t matrix_mask[] = {
+    0b0111111111111101,
+    0b0111111111111111,
+    0b0111111111111111,
+    0b0111111111111111,
+    0b0111111111111111,
+    0b0111111111111111,
+};
+
+#ifdef RGB_MATRIX_ENABLE
 const is31_led __flash g_is31_leds[DRIVER_LED_TOTAL] = {
 /* Refer to IS31 manual for these locations
  *   driver
@@ -139,3 +149,4 @@ led_config_t g_led_config = {
         4,      4,      4,                              4,                              4,      4,      4,      4,      4,      4
     }
 };
+#endif

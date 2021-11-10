@@ -20,6 +20,25 @@
 #define PRODUCT_ID      0x0112
 #define DEVICE_VER      0x0100
 
+/* key matrix size */
+#define MATRIX_ROWS 5
+#define MATRIX_COLS 15
+
+/* key matrix pins */
+#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
+
+/* DIP switch */
+#define DIP_SWITCH_MATRIX_GRID  { {4, 4} }
+
+/* RGB Matrix Configuration */
+#define DRIVER_1_LED_TOTAL 34
+#define DRIVER_2_LED_TOTAL 34
+#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+/* Setting number of scan phase in one frame */
+#define PHASE_CHANNEL 0x03
+
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 34
 #define DRIVER_2_LED_TOTAL 34

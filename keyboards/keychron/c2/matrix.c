@@ -88,43 +88,32 @@ static void SendTo595(uint8_t byteData) {
 }
 
 static bool select_col(uint8_t col) {
-    pin_t pin = 0;
+    pin_t pin = col_pins[col];
 
-    if (col > 10) {
-        SendTo595(~(0x1<<(MATRIX_COLS - col -1)));
+    if (pin != NO_PIN) {
+        setPinOutput_writeLow(pin);
         return true;
     } else {
-        pin = col_pins[col];
-
-        if (pin != NO_PIN) {
-            setPinOutput_writeLow(pin);
-            return true;
-        }
+        SendTo595(~(0x1<<(MATRIX_COLS - col -1)));
+        return true;
     }
     return false;
 }
 
 static void unselect_col(uint8_t col) {
-    pin_t pin = 0;
+    pin_t pin = col_pins[col];
 
-    if (col > 10) {
-        SendTo595(0xFF);
+    if (pin != NO_PIN) {
+        setPinInputHigh_atomic(pin);
     } else {
-        pin = col_pins[col];
-
-        if (pin != NO_PIN) {
-            setPinOutput_writeHigh(pin);
-        }
+        SendTo595(0xFF);
     }
 }
 
 static void unselect_cols(void) {
     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-        if (x > 10)
-            break;
-        unselect_col(x);
+            unselect_col(x);
     }
-    SendTo595(0xFF);
 }
 
 static void matrix_init_pins(void) {
@@ -140,7 +129,7 @@ void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col)
     bool key_pressed = false;
 
     // Select col
-    if (!select_col(current_col)) {  // select col
+    if (!select_col(current_col)) {
         return;                      // skip NO_PIN col
     }
     matrix_output_select_delay();
