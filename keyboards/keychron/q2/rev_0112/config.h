@@ -39,7 +39,9 @@
 /* Setting number of scan phase in one frame */
 #define PHASE_CHANNEL 0x03
 
-/* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 34
-#define DRIVER_2_LED_TOTAL 34
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+/* EEPROM Driver Configuration */
+#define EXTERNAL_EEPROM_I2C_BASE_ADDRESS 0b10100010
+// #define EXTERNAL_EEPROM_BYTE_COUNT 8192
+// #define EXTERNAL_EEPROM_PAGE_SIZE 32
+// #define EXTERNAL_EEPROM_ADDRESS_SIZE 2
+// #define EXTERNAL_EEPROM_WRITE_TIME 5
