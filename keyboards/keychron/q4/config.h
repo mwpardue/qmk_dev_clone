@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron(https://www.keychron.com)
+/* Copyright 2021 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,13 +19,34 @@
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x3434
 #define MANUFACTURER    Keychron
-#define PRODUCT         Keychron Q1
+#define PRODUCT         Keychron Q2
+
+/* key matrix size */
+#define MATRIX_ROWS 5
+#define MATRIX_COLS 14
+
+/* key matrix pins */
+#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9 }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
+
+/* RGB Matrix Driver Configuration */
+#define DRIVER_COUNT 2
+#define DRIVER_ADDR_1 0b1110111
+#define DRIVER_ADDR_2 0b1110100
+
+/* Setting number of scan phase in one frame, now we enable channel CB1-CB9
+ * to ensure that the LED matrix reaches maximum brightness
+ */
+#define PHASE_CHANNEL 0x03
+
+/* DIP switch */
+#define DIP_SWITCH_MATRIX_GRID  { {4,4} }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -52,6 +73,9 @@
 #define DISABLE_RGB_MATRIX_HUE_PENDULUM
 #define DISABLE_RGB_MATRIX_HUE_WAVE
 
-/* BOOTMAGIC LITE key */
-#define BOOTMAGIC_LITE_ROW 5
-#define BOOTMAGIC_LITE_COLUMN 5
+/* EEPROM Driver Configuration */
+// #define EXTERNAL_EEPROM_I2C_BASE_ADDRESS 0b10100010
+// #define EXTERNAL_EEPROM_BYTE_COUNT 8192
+// #define EXTERNAL_EEPROM_PAGE_SIZE 32
+// #define EXTERNAL_EEPROM_ADDRESS_SIZE 2
+// #define EXTERNAL_EEPROM_WRITE_TIME 5

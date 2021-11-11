@@ -21,11 +21,23 @@
 #define MANUFACTURER    Keychron
 #define PRODUCT         Keychron Q1
 
+/* key matrix size */
+#define MATRIX_ROWS 6
+#define MATRIX_COLS 16
+
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
+
+/* RGB Matrix Driver Configuration */
+#define DRIVER_COUNT 2
+#define DRIVER_ADDR_1 0b1110111
+#define DRIVER_ADDR_2 0b1110100
+
+/* DIP switch */
+#define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
