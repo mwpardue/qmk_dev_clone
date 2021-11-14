@@ -17,8 +17,7 @@
         "xstddef": "c",
         "type_traits": "c",
         "utility": "c",
-        "ranges": "c",
-        "*.def": "c"
+        "ranges": "c"
     },
     "[markdown]": {
         "editor.trimAutoWhitespace": false,
@@ -27,6 +26,5 @@
     "python.formatting.provider": "yapf",
     "[json]": {
 	    "editor.formatOnSave": false
-    },
-    "cmake.sourceDirectory": "${workspaceFolder}/lib/googletest"
+    }
 }
