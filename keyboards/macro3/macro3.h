@@ -1,4 +1,5 @@
-/* Copyright 2021 Harrison Chan (Xelus)
+/* Copyright 2020 David Philip Barr <@davidphilipbarr>
+ * Copyright 2021 @filterpaper
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,12 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
 
 #include "quantum.h"
 
-#if defined(KEYBOARD_xelus_pachi_rgb_rev1)
-    #include "rev1.h"
-#elif defined(KEYBOARD_xelus_pachi_rgb_rev2)
-    #include "rev2.h"
-#endif
+#define LAYOUT( \
+    K00, K01, K02, K03, \
+    K10, K11, K12, K13  \
+) \
+{ \
+    { K00, K01, K02, K03 }, \
+    { K10, K11, K12, K13 }  \
+}
+
