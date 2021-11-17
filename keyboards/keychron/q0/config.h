@@ -19,15 +19,15 @@
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x3434
 #define MANUFACTURER    Keychron
-#define PRODUCT         Keychron Q3
+#define PRODUCT         Keychron Q0
 
 /* key matrix size */
 #define MATRIX_ROWS 6
-#define MATRIX_COLS 16
+#define MATRIX_COLS 4
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, A10, H3 }
+#define MATRIX_COL_PINS { A5, A6, A7, B0 }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -35,22 +35,17 @@
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
 
-/* RGB Matrix Driver Configuration */
-#define DRIVER_COUNT 2
-#define DRIVER_ADDR_1 0b1110111
-#define DRIVER_ADDR_2 0b1110100
-
-/* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
-
-/* Disable DIP switch in matrix data */
-#define MATRIX_MASKED
-
 /* NKRO */
 #define FORCE_NKRO
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
+
+/* We should define NOP_FUDGE manually because it's definition for L4X2/L4x3 hasn't been implemented */
+#define NOP_FUDGE 0.4
+
+/* Only use 2 dynamic keymap layers */
+#define DYNAMIC_KEYMAP_LAYER_COUNT 2
 
 /* Disable a single effect */
 #define DISABLE_RGB_MATRIX_ALPHAS_MODS
@@ -67,7 +62,3 @@
 #define DISABLE_RGB_MATRIX_HUE_BREATHING
 #define DISABLE_RGB_MATRIX_HUE_PENDULUM
 #define DISABLE_RGB_MATRIX_HUE_WAVE
-
-/* BOOTMAGIC LITE key */
-#define BOOTMAGIC_LITE_ROW 5
-#define BOOTMAGIC_LITE_COLUMN 5

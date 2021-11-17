@@ -24,18 +24,18 @@ enum layers{
 };
 
 enum custom_keycodes {
-    KC_MISSION_CONTROL = SAFE_RANGE,
+    KC_MISSION_CONTROL = USER00,
     KC_LAUNCHPAD,
     KC_SIRI
 };
 
-static uint16_t key_pressed_time = 0;
-static bool key_pressed_flag = false;
+static uint16_t key_siri_pressed_time = 0;
+static bool key_siri_pressed_flag = false;
 
 #define KC_TASK LGUI(KC_TAB)
 #define KC_FLXP LGUI(KC_E)
 #define KC_CORTANA LGUI(KC_C)
-#define KC_PRTSC (QK_LSFT | QK_LGUI | KC_4)
+#define KC_PRTSC (QK_LGUI | QK_LSFT | KC_4)
 #define KC_MCTL KC_MISSION_CONTROL
 #define KC_LPAD KC_LAUNCHPAD
 
@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,  KC_DEL,   KC_END,    KC_PGDN,  KC_P7,   KC_P8,    KC_P9,
         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            KC_ENT,                                  KC_P4,   KC_P5,    KC_P6,    KC_PPLS,
         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,            KC_RSFT,            KC_UP,               KC_P1,   KC_P2,    KC_P3,
-        KC_LCTL,  KC_LOPT,  KC_LCMD,                                KC_SPC,                                 KC_LCMD,  KC_ROPT, MO(MAC_FN),KC_RCTL,  KC_LEFT,  KC_DOWN,   KC_RGHT,  KC_P0,             KC_PDOT,  KC_PENT),
+        KC_LCTL,  KC_LOPT,  KC_LCMD,                                KC_SPC,                                 KC_RCMD,  KC_ROPT, MO(MAC_FN),KC_RCTL,  KC_LEFT,  KC_DOWN,   KC_RGHT,  KC_P0,             KC_PDOT,  KC_PENT),
     [MAC_FN] = LAYOUT_ansi_104(
         KC_TRNS,            KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_TRNS,  KC_TRNS,   KC_TRNS,
         KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS,
@@ -89,8 +89,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_SIRI:
             if (record->event.pressed) {
                 SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_SPACE));
-                key_pressed_time = timer_read();
-                key_pressed_flag = true;
+                key_siri_pressed_time = timer_read();
+                key_siri_pressed_flag = true;
             } else {
                 // Do something else when release
             }
@@ -101,9 +101,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void matrix_scan_user(void) {
-    if (key_pressed_flag) {
-        if (timer_elapsed(key_pressed_time) >= 500) {
-            key_pressed_flag = false;
+    if (key_siri_pressed_flag) {
+        if (timer_elapsed(key_siri_pressed_time) >= 500) {
+            key_siri_pressed_flag = false;
             SEND_STRING(SS_UP(X_LGUI) SS_UP(X_SPACE));
         }
     }
@@ -112,9 +112,11 @@ void matrix_scan_user(void) {
 bool dip_switch_update_user(uint8_t index, bool active) {
     if (index == 0) {
         if (active) {
+            default_layer_set(1UL << 0);
             rgb_matrix_set_color(106, 0, 0, 255);
             rgb_matrix_set_color(107, 0, 0, 0);
         } else {
+            default_layer_set(1UL << 2);
             rgb_matrix_set_color(107, 0, 0, 255);
             rgb_matrix_set_color(106, 0, 0, 0);
         }

@@ -189,3 +189,8 @@ void clear_eeprom(void) {
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(HSV_OFF);
 }
+
+#if defined(KEYBOARD_keychron_q1_rev_0107)
+void restart_usb_driver(USBDriver *usbp) {
+}
+#endif

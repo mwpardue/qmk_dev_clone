@@ -189,3 +189,6 @@ void clear_eeprom(void) {
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(HSV_OFF);
 }
+
+void restart_usb_driver(USBDriver *usbp) {
+}

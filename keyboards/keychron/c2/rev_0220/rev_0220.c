@@ -16,6 +16,8 @@
 
 #include "quantum.h"
 
+#include "print.h"
+
 #ifdef RGB_MATRIX_ENABLE
 const ckled2001_led __flash g_ckled2001_leds[DRIVER_LED_TOTAL] = {
 /* Refer to IS31 manual for these locations
@@ -167,3 +169,4 @@ led_config_t g_led_config = {
     }
 };
 #endif
+

@@ -16,8 +16,13 @@
 
 #pragma once
 
-#include "quantum.h"
+/* USB Device descriptor parameter */
+#define PRODUCT_ID      0x0130
+#define DEVICE_VER      0x0100
 
-#if   defined(KEYBOARD_keychron_c2_rev_0220)
-#    include "rev_0220.h"
-#endif
+// The pin connected to the data pin of the LEDs
+#define RGB_DI_PIN B1
+// The number of LEDs connected
+#define DRIVER_LED_TOTAL 21
+
+//#define RGB_MATRIX_KEYPRESSES

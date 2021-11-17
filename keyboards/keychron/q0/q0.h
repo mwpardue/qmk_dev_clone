@@ -18,6 +18,6 @@
 
 #include "quantum.h"
 
-#if   defined(KEYBOARD_keychron_c2_rev_0220)
-#    include "rev_0220.h"
+#if   defined(KEYBOARD_keychron_q0_rev_0130)
+#    include "rev_0130.h"
 #endif

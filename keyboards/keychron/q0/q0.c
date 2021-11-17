@@ -14,10 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "q0.h"
 
-#include "quantum.h"
-
-#if   defined(KEYBOARD_keychron_c2_rev_0220)
-#    include "rev_0220.h"
-#endif
+void board_init(void)
+{
+    setPinOutput(B1);
+    writePinLow(B1);
+}
