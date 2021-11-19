@@ -21,12 +21,6 @@
 
 #pragma once
 
-#define HAL_USE_PWM FALSE
-
-#define HAL_USE_SPI FALSE
-
-#define PAL_USE_CALLBACKS FALSE
-
 #define HAL_USE_I2C TRUE
 
 #include_next <halconf.h>

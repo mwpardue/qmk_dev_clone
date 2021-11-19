@@ -71,3 +71,6 @@
 /* BOOTMAGIC LITE key */
 #define BOOTMAGIC_LITE_ROW 5
 #define BOOTMAGIC_LITE_COLUMN 5
+
+/* Set USB polling rate as 1 milliseconds */
+#define USB_POLLING_INTERVAL_MS 1

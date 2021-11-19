@@ -18,7 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID      0x0107
-#define DEVICE_VER      0x0200
+#define DEVICE_VER      0x0201
 
 /* key matrix size */
 #define MATRIX_ROWS 6
@@ -41,8 +41,11 @@
 #define DRIVER_2_LED_TOTAL 37
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-/* Setting number of scan phase in one frame */
-#define PHASE_CHANNEL 0x03
+/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+#define PHASE_CHANNEL MSKPHASE_9CHANNEL
+
+/* Set the maxium brightness as 190 */
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 190
 
 /* Encoder used pins */
 #define ENCODERS_PAD_A { A10 }

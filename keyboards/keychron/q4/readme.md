@@ -8,11 +8,11 @@ A customizable 60% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q4/rev_0130:default
+    make keychron/q4/rev_0140:default
 
 Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
 
-    make keychron/q4/rev_0130:default:flash
+    make keychron/q4/rev_0140:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 
