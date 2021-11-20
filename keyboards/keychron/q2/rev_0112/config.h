@@ -36,8 +36,8 @@
 #define DRIVER_2_LED_TOTAL 34
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-/* Setting number of scan phase in one frame */
-#define PHASE_CHANNEL 0x03
+/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+#define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
 /* EEPROM Driver Configuration */
 // #define EXTERNAL_EEPROM_I2C_BASE_ADDRESS 0b10100010
