@@ -26,6 +26,6 @@
 #    include "rev_0102.h"
 #elif defined(KEYBOARD_keychron_q1_rev_0107)
 #    include "rev_0107.h"
-#elif defined(KEYBOARD_keychron_q1_rev_010A)
-#    include "rev_010A.h"
+#elif defined(KEYBOARD_keychron_q1_rev_010a)
+#    include "rev_010a.h"
 #endif
