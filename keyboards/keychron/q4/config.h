@@ -55,6 +55,9 @@
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
+/* Set 5 dynamic keymap layers */
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+
 /* Disable a single effect */
 #define DISABLE_RGB_MATRIX_ALPHAS_MODS
 #define DISABLE_RGB_MATRIX_GRADIENT_UP_DOWN

@@ -19,7 +19,7 @@
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x3434
 #define MANUFACTURER    Keychron
-#define PRODUCT         Keychron Q2
+#define PRODUCT         Keychron Q7
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -27,7 +27,7 @@
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, B5 }
+#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, A10, B5 }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -40,10 +40,8 @@
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
 
-/* Setting number of scan phase in one frame, now we enable channel CB1-CB9
- * to ensure that the LED matrix reaches maximum brightness
- */
-#define PHASE_CHANNEL 0x03
+/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+#define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {4,4} }
@@ -56,6 +54,9 @@
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
+
+/* Set 5 dynamic keymap layers */
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
 /* Disable a single effect */
 #define DISABLE_RGB_MATRIX_ALPHAS_MODS

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "q2.h"
+#include "q7.h"
 #include "test.c"
 
 const matrix_row_t matrix_mask[] = {
