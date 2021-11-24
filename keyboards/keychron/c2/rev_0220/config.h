@@ -20,11 +20,11 @@
 #define PRODUCT_ID      0x0220
 #define DEVICE_VER      0x0100
 
-/* key matrix size */
+/* Key matrix size */
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 19
 
-/* key matrix pins */
+/* Key matrix pins */
 #define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
 #define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, A2, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
 

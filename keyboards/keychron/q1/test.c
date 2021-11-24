@@ -37,80 +37,80 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MO(MAC_FN):
         case MO(WIN_FN):
-          if (record->event.pressed) {
-             key_press += 1;
-             key_count += 1;
-             key_count_flag = true;
-          } else {
-             key_press = 0;
-             key_count = 0;
-             key_count_flag = false;
-          }
-          return true;
+            if (record->event.pressed) {
+                key_press += 1;
+                key_count += 1;
+                key_count_flag = true;
+            } else {
+                key_press = 0;
+                key_count = 0;
+                key_count_flag = false;
+            }
+            return true;
 
         case KC_J:
         case KC_Z:
-          if (key_count_flag && record->event.pressed) {
-              key_count += 1;
-              if(key_count == 3) {
-                  key_count_flag = false;
-                  test_clear_blink = TEST_OR_CLEAR;
-                  current_time = timer_read();
-              }
-          } else {
-              key_count = 0;
-          }
-          return true;
+            if (key_count_flag && record->event.pressed) {
+                key_count += 1;
+                if(key_count == 3) {
+                    key_count_flag = false;
+                    test_clear_blink = TEST_OR_CLEAR;
+                    current_time = timer_read();
+                }
+            } else {
+                key_count = 0;
+            }
+            return true;
 
         case KC_RGHT:
-          if (record->event.pressed) {
-              if(key_count_flag) {
-                   key_press += 1;
-                   if(key_press == 3) {
+            if (record->event.pressed) {
+                if(key_count_flag) {
+                    key_press += 1;
+                    if(key_press == 3) {
                         key_count_flag = false;
                         led_state = rgb_matrix_get_mode();
                         hsv = rgb_matrix_get_hsv();
                         test_clear_blink = TEST_OR_CLEAR;
                         current_time = timer_read();
-                   }
-               }
-               if(entry_led_test_flag) {
-                   led_color_status += 1;
-                   if(led_color_status > 3) {
-                       led_color_status = WHITE;
-                   }
-                   led_test(led_color_status);
-               }
-          } else {
+                    }
+                }
+                if(entry_led_test_flag) {
+                    led_color_status += 1;
+                    if(led_color_status > 3) {
+                        led_color_status = WHITE;
+                    }
+                    led_test(led_color_status);
+                }
+            } else {
                 key_press = 0;
-          }
-          return true;
+            }
+            return true;
 
         case KC_HOME:
-          if (record->event.pressed) {
-              if(key_count_flag) {
-                   key_press += 1;
-                   if(key_press == 3) {
-                       key_count_flag = false;
-                       led_state = rgb_matrix_get_mode();
-                       hsv = rgb_matrix_get_hsv();
-                       test_clear_blink = TEST_OR_CLEAR;
-                       current_time = timer_read();
-                   }
-              }
-              if(entry_led_test_flag) {
-                   entry_led_test_flag = false;
-                   rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
-                   rgb_matrix_mode_noeeprom(led_state);
-              }
-          } else {
+            if (record->event.pressed) {
+                if(key_count_flag) {
+                    key_press += 1;
+                    if(key_press == 3) {
+                        key_count_flag = false;
+                        led_state = rgb_matrix_get_mode();
+                        hsv = rgb_matrix_get_hsv();
+                        test_clear_blink = TEST_OR_CLEAR;
+                        current_time = timer_read();
+                    }
+                }
+                if(entry_led_test_flag) {
+                    entry_led_test_flag = false;
+                    rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
+                    rgb_matrix_mode_noeeprom(led_state);
+                }
+            } else {
                 key_press = 0;
-          }
-          return true;
+            }
+            return true;
 
         default:
-        //   return true;
-          return process_record_user(keycode, record);
+            // return true;
+            return process_record_user(keycode, record);
     }
 }
 
@@ -175,7 +175,9 @@ void led_test(uint8_t color) {
 }
 
 void clear_eeprom(void) {
+    layer_state_t default_layer_tmp = default_layer_state;
     eeconfig_init();
+    default_layer_set(default_layer_tmp);
     #ifdef VIA_ENABLE
         // This resets the layout options
         via_set_layout_options(VIA_EEPROM_LAYOUT_OPTIONS_DEFAULT);
@@ -191,6 +193,9 @@ void clear_eeprom(void) {
 }
 
 #if defined(KEYBOARD_keychron_q1_rev_0107)
+
 void restart_usb_driver(USBDriver *usbp) {
+    // Do nothing here
 }
+
 #endif

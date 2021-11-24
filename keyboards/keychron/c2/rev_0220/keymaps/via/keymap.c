@@ -26,18 +26,19 @@ enum layers{
 enum custom_keycodes {
     KC_MISSION_CONTROL = USER00,
     KC_LAUNCHPAD,
-    KC_SIRI
+    KC_SIRI,
+    KC_PRTSC,
+    KC_TASK,
+    KC_FLXP,
+    KC_CORTANA
 };
 
 static uint16_t key_siri_pressed_time = 0;
 static bool key_siri_pressed_flag = false;
 
-#define KC_TASK LGUI(KC_TAB)
-#define KC_FLXP LGUI(KC_E)
-#define KC_CORTANA LGUI(KC_C)
-#define KC_PRTSC (QK_LGUI | QK_LSFT | KC_4)
 #define KC_MCTL KC_MISSION_CONTROL
 #define KC_LPAD KC_LAUNCHPAD
+#define KC_CRTA KC_CORTANA
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_104(
@@ -55,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,            KC_TRNS,             KC_TRNS, KC_TRNS,  KC_TRNS,
         KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,           KC_TRNS, KC_TRNS),
     [WIN_BASE] = LAYOUT_ansi_104(
-        KC_ESC,             KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_PSCR,  KC_CORTANA,RGB_MOD,
+        KC_ESC,             KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_PSCR,  KC_CRTA,   RGB_MOD,
         KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,  KC_INS,   KC_HOME,   KC_PGUP,  KC_NLCK, KC_PSLS,  KC_PAST,  KC_PMNS,
         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,  KC_DEL,   KC_END,    KC_PGDN,  KC_P7,   KC_P8,    KC_P9,
         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            KC_ENT,                                  KC_P4,   KC_P5,    KC_P6,    KC_PPLS,
@@ -95,6 +96,44 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 // Do something else when release
             }
             return false;  // Skip all further processing of this key
+        case KC_PRTSC:
+            if (record->event.pressed) {
+                register_code(KC_LCMD);
+                register_code(KC_LSFT);
+                register_code(KC_4);
+            } else {
+                unregister_code(KC_LCMD);
+                unregister_code(KC_LSFT);
+                unregister_code(KC_4);
+            }
+            return false;  // Skip all further processing of this key
+        case KC_TASK:
+            if (record->event.pressed) {
+                register_code(KC_LWIN);
+                register_code(KC_TAB);
+            } else {
+                unregister_code(KC_LWIN);
+                unregister_code(KC_TAB);
+            }
+            return false;  // Skip all further processing of this key
+        case KC_FLXP:
+            if (record->event.pressed) {
+                register_code(KC_LWIN);
+                register_code(KC_E);
+            } else {
+                unregister_code(KC_LWIN);
+                unregister_code(KC_E);
+            }
+            return false;  // Skip all further processing of this key
+        case KC_CORTANA:
+            if (record->event.pressed) {
+                register_code(KC_LWIN);
+                register_code(KC_C);
+            } else {
+                unregister_code(KC_LWIN);
+                unregister_code(KC_C);
+            }
+            return false;  // Skip all further processing of this key
         default:
             return true;  // Process all other keycodes normally
     }
@@ -104,24 +143,10 @@ void matrix_scan_user(void) {
     if (key_siri_pressed_flag) {
         if (timer_elapsed(key_siri_pressed_time) >= 500) {
             key_siri_pressed_flag = false;
+            key_siri_pressed_time = 0;
             SEND_STRING(SS_UP(X_LGUI) SS_UP(X_SPACE));
         }
     }
-}
-
-bool dip_switch_update_user(uint8_t index, bool active) {
-    if (index == 0) {
-        if (active) {
-            default_layer_set(1UL << 0);
-            rgb_matrix_set_color(106, 0, 0, 255);
-            rgb_matrix_set_color(107, 0, 0, 0);
-        } else {
-            default_layer_set(1UL << 2);
-            rgb_matrix_set_color(107, 0, 0, 255);
-            rgb_matrix_set_color(106, 0, 0, 0);
-        }
-    }
-    return true;
 }
 
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
@@ -134,5 +159,12 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         RGB_MATRIX_INDICATOR_SET_COLOR(105, 0, 0, 255);
     } else {
         RGB_MATRIX_INDICATOR_SET_COLOR(105, 0, 0, 0);
+    }
+    if (default_layer_state & (1UL << 0)) {
+        rgb_matrix_set_color(106, 0, 0, 255);
+        rgb_matrix_set_color(107, 0, 0, 0);
+    } else {
+        rgb_matrix_set_color(107, 0, 0, 255);
+        rgb_matrix_set_color(106, 0, 0, 0);
     }
 }
