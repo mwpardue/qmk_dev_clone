@@ -46,3 +46,7 @@
 
 /* Set the maxium brightness as 190 in order to limit the current to 450mA */
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 190
+
+/* reacts to keypresses */
+//#define RGB_MATRIX_KEYPRESSES
+

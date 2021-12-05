@@ -140,8 +140,7 @@ void matrix_scan_kb(void) {
                     time_200ms = 0;
                     test_clear_blink = NONE;
                     entry_led_test_flag = false;
-                    rgb_matrix_sethsv(0, UINT8_MAX, UINT8_MAX);
-                    rgb_matrix_mode(RGB_MATRIX_CYCLE_LEFT_RIGHT);
+                    rgb_matrix_init();
                 }
             }
             break;
@@ -186,6 +185,7 @@ void clear_eeprom(void) {
         // This resets the macros in EEPROM to nothing.
         dynamic_keymap_macro_reset();
     #endif
+    rgb_matrix_enable();
     led_time_buffer = timer_read();
     test_clear_blink = LED_BLINK;
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);

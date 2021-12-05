@@ -44,7 +44,7 @@
 #define ENCODERS_PAD_B { B5 }
 
 /* Specifies the number of pulses the encoder registers between each detent */
-#define ENCODER_RESOLUTION 2
+#define ENCODER_RESOLUTION 4
 
 /* EEPROM Driver Configuration */
 // #define EXTERNAL_EEPROM_I2C_BASE_ADDRESS 0b10100010
