@@ -17,7 +17,7 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define PRODUCT_ID      0x0106
+#define PRODUCT_ID      0x010a
 #define DEVICE_VER      0x0200
 
 /* key matrix size */
@@ -37,8 +37,8 @@
 #define DRIVER_ADDR_2 0b1110100
 
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 45
-#define DRIVER_2_LED_TOTAL 37
+#define DRIVER_1_LED_TOTAL 46
+#define DRIVER_2_LED_TOTAL 40
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */

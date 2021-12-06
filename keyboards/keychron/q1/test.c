@@ -109,8 +109,8 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             return true;
 
         default:
-            // return true;
-            return process_record_user(keycode, record);
+        //   return true;
+        return process_record_user(keycode, record);
     }
 }
 
@@ -174,9 +174,9 @@ void led_test(uint8_t color) {
 }
 
 void clear_eeprom(void) {
-    layer_state_t default_layer_tmp = default_layer_state;
+    layer_state_t default_layer_temp = default_layer_state;
     eeconfig_init();
-    default_layer_set(default_layer_tmp);
+    default_layer_set(default_layer_temp);
     #ifdef VIA_ENABLE
         // This resets the layout options
         via_set_layout_options(VIA_EEPROM_LAYOUT_OPTIONS_DEFAULT);
@@ -185,17 +185,11 @@ void clear_eeprom(void) {
         // This resets the macros in EEPROM to nothing.
         dynamic_keymap_macro_reset();
     #endif
-    rgb_matrix_enable();
     led_time_buffer = timer_read();
     test_clear_blink = LED_BLINK;
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(HSV_OFF);
 }
 
-#if defined(KEYBOARD_keychron_q1_rev_0107)
-
 void restart_usb_driver(USBDriver *usbp) {
-    // Do nothing here
 }
-
-#endif
