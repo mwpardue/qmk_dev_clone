@@ -22,7 +22,6 @@
 #include "debounce.h"
 #include "quantum.h"
 
-
 #ifdef MATRIX_ROW_PINS
 static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
 #endif  // MATRIX_ROW_PINS

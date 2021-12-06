@@ -140,8 +140,7 @@ void matrix_scan_kb(void) {
                     time_200ms = 0;
                     test_clear_blink = NONE;
                     entry_led_test_flag = false;
-                    rgb_matrix_sethsv(0, UINT8_MAX, UINT8_MAX);
-                    rgb_matrix_mode(RGB_MATRIX_CYCLE_LEFT_RIGHT);
+                    rgb_matrix_init();
                 }
             }
             break;

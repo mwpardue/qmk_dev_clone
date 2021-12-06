@@ -87,3 +87,7 @@
 // #define EXTERNAL_EEPROM_PAGE_SIZE 32
 // #define EXTERNAL_EEPROM_ADDRESS_SIZE 2
 // #define EXTERNAL_EEPROM_WRITE_TIME 5
+
+/* Set USB polling rate as 1 milliseconds */
+#define USB_POLLING_INTERVAL_MS 1
+
