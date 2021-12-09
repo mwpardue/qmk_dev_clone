@@ -1,5 +1,5 @@
 {
-    "keyboard_name": "Keychron Q1",
+    "keyboard_name": "Keychron Q3",
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
     "layouts": {
@@ -18,9 +18,9 @@
                 {"label":"F10", "x":12, "y":0},
                 {"label":"F11", "x":13, "y":0},
                 {"label":"F12", "x":14, "y":0},
-                {"label":"Print Screen", "x":15.25, "y":0},
+                {"label":"Print", "x":15.25, "y":0},
                 {"label":"Cortana", "x":16.25, "y":0},
-                {"label":"Screen Lock", "x":17.25, "y":0},
+                {"label":"Light", "x":17.25, "y":0},
 
                 {"label":"~", "x":0, "y":1.25},
                 {"label":"!", "x":1, "y":1.25},

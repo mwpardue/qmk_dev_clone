@@ -54,10 +54,6 @@
 /* Set the maxium brightness as 190 in order to limit the current to 450mA */
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 190
 
-// #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-// #define RGB_MATRIX_KEYPRESSES
-// #define RGB_MATRIX_KEYRELEASES
-
 /* Disable a single effect */
 #define DISABLE_RGB_MATRIX_ALPHAS_MODS
 #define DISABLE_RGB_MATRIX_GRADIENT_UP_DOWN
@@ -73,4 +69,3 @@
 #define DISABLE_RGB_MATRIX_HUE_BREATHING
 #define DISABLE_RGB_MATRIX_HUE_PENDULUM
 #define DISABLE_RGB_MATRIX_HUE_WAVE
-

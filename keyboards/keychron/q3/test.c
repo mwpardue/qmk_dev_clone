@@ -185,6 +185,7 @@ void clear_eeprom(void) {
         // This resets the macros in EEPROM to nothing.
         dynamic_keymap_macro_reset();
     #endif
+    rgb_matrix_enable_noeeprom();
     led_time_buffer = timer_read();
     test_clear_blink = LED_BLINK;
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);

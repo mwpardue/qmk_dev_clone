@@ -18,7 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID      0x0111
-#define DEVICE_VER      0x0101
+#define DEVICE_VER      0x0102
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -45,10 +45,3 @@
 
 /* Specifies the number of pulses the encoder registers between each detent */
 #define ENCODER_RESOLUTION 4
-
-/* EEPROM Driver Configuration */
-// #define EXTERNAL_EEPROM_I2C_BASE_ADDRESS 0b10100010
-// #define EXTERNAL_EEPROM_BYTE_COUNT 8192
-// #define EXTERNAL_EEPROM_PAGE_SIZE 32
-// #define EXTERNAL_EEPROM_ADDRESS_SIZE 2
-// #define EXTERNAL_EEPROM_WRITE_TIME 5

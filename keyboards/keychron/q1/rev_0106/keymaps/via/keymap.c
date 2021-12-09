@@ -16,6 +16,12 @@
 
 #include QMK_KEYBOARD_H
 
+#ifdef VIA_ENABLE
+    #define USER_START USER00
+#else
+    #define USER_START SAFE_RANGE
+#endif
+
 enum layers{
     MAC_BASE,
     MAC_FN,
@@ -24,16 +30,32 @@ enum layers{
 };
 
 enum custom_keycodes {
-    KC_MissionControl = USER00,
-    KC_LaunchPad,
-    KC_TaskView,
-    KC_FileExplorer
+    KC_MISSION_CONTROL = USER_START,
+    KC_LAUNCHPAD,
+    KC_LOPTN,
+    KC_ROPTN,
+    KC_LCMMD,
+    KC_RCMMD,
+    KC_TASK_VIEW,
+    KC_FILE_EXPLORER
 };
 
-#define KC_MCTL KC_MissionControl
-#define KC_LPAD KC_LaunchPad
-#define KC_TASK KC_TaskView
-#define KC_FLXP KC_FileExplorer
+typedef struct PACKED {
+    uint8_t len;
+    uint8_t keycode[2];
+} key_combination_t;
+
+key_combination_t key_comb_list[2] = {
+    {2, {KC_LWIN, KC_TAB}},
+    {2, {KC_LWIN, KC_E}}
+};
+
+#define KC_MCTL KC_MISSION_CONTROL
+#define KC_LPAD KC_LAUNCHPAD
+#define KC_TASK KC_TASK_VIEW
+#define KC_FLXP KC_FILE_EXPLORER
+
+static uint8_t mac_keycode[4] = { KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_82(
@@ -42,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,   KC_RBRC,  KC_BSLS,            KC_PGDN,
             KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,             KC_ENT,             KC_HOME,
             KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,             KC_RSFT,  KC_UP,
-            KC_LCTL,  KC_LOPT,  KC_LCMD,                                KC_SPC,                                 KC_RCMD, MO(MAC_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+            KC_LCTL,  KC_LOPTN, KC_LCMMD,                               KC_SPC,                                 KC_RCMMD,MO(MAC_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
         [MAC_FN] = LAYOUT_ansi_82(
             KC_TRNS,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,    KC_F12,   KC_TRNS,            KC_TRNS,
@@ -68,17 +90,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,  KC_TRNS,
             KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 };
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_MCTL:
+        case KC_LOPTN:
+        case KC_ROPTN:
+        case KC_LCMMD:
+        case KC_RCMMD:
             if (record->event.pressed) {
+                register_code(mac_keycode[keycode - KC_LOPTN]);
+            } else {
+                unregister_code(mac_keycode[keycode - KC_LOPTN]);
+            }
+            return false;
+        case KC_MISSION_CONTROL:
+           if (record->event.pressed) {
                 host_consumer_send(0x29F);
             } else {
                 host_consumer_send(0);
             }
             return false;  // Skip all further processing of this key
-        case KC_LPAD:
+        case KC_LAUNCHPAD:
             if (record->event.pressed) {
                 host_consumer_send(0x2A0);
             } else {
@@ -86,21 +117,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;  // Skip all further processing of this key
         case KC_TASK:
-            if (record->event.pressed) {
-                register_code(KC_LWIN);
-                register_code(KC_TAB);
-            } else {
-                unregister_code(KC_LWIN);
-                unregister_code(KC_TAB);
-            }
-            return false;  // Skip all further processing of this key
         case KC_FLXP:
             if (record->event.pressed) {
-                register_code(KC_LWIN);
-                register_code(KC_E);
+                for (uint8_t i = 0; i < key_comb_list[keycode - KC_TASK].len; i++) {
+                    register_code(key_comb_list[keycode - KC_TASK].keycode[i]);
+                }
             } else {
-                unregister_code(KC_LWIN);
-                unregister_code(KC_E);
+                for (uint8_t i = 0; i < key_comb_list[keycode - KC_TASK].len; i++) {
+                    unregister_code(key_comb_list[keycode - KC_TASK].keycode[i]);
+                }
             }
             return false;  // Skip all further processing of this key
         default:

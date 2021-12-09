@@ -15,7 +15,12 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "print.h"
+
+#ifdef VIA_ENABLE
+    #define USER_START USER00
+#else
+    #define USER_START SAFE_RANGE
+#endif
 
 enum layers{
   MAC_BASE,
@@ -24,17 +29,33 @@ enum layers{
   WIN_FN
 };
 
-enum custom_keycodes{
-    KC_MISSION_CONTROL = USER00,
+enum custom_keycodes {
+    KC_MISSION_CONTROL = USER_START,
     KC_LAUNCHPAD,
-    KC_TASK,
-    KC_FLXP
+    KC_TASK_VIEW,
+    KC_FILE_EXPLORER,
+    KC_LOPTN,
+    KC_ROPTN,
+    KC_LCMMD,
+    KC_RCMMD
 };
 
-//#define KC_TASK G(KC_TAB)
-//#define KC_FLXP G(KC_E)
 #define KC_MCTL KC_MISSION_CONTROL
 #define KC_LPAD KC_LAUNCHPAD
+#define KC_TASK KC_TASK_VIEW
+#define KC_FLXP KC_FILE_EXPLORER
+
+typedef struct PACKED {
+    uint8_t len;
+    uint8_t keycode[2];
+} key_combination_t;
+
+key_combination_t key_comb_list[2] = {
+    {2, {KC_LWIN, KC_TAB}},
+    {2, {KC_LWIN, KC_E}}
+};
+
+static uint8_t mac_keycode[4] = { KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_all(
@@ -51,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
          KC_TRNS,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,            KC_TRNS,
          KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,
-         KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,  RGB_MOD,  RGB_RMOD,           KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+         KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,  RGB_VAD,  RGB_VAI,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
     [WIN_BASE] = LAYOUT_all(
          KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             KC_MUTE,
@@ -67,61 +88,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
          KC_TRNS,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,            KC_TRNS,
          KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,
-         KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,  RGB_MOD,  RGB_RMOD,           KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+         KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,  RGB_VAD,  RGB_VAI,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 };
 
 #if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
 
 #define ENCODERS 1
-    static uint8_t  encoder_state[ENCODERS] = {0};
-    static keypos_t encoder_cw[ENCODERS]    = {{ 8, 5 }};
-    static keypos_t encoder_ccw[ENCODERS]  = {{ 7, 5 }};
+static uint8_t  encoder_state[ENCODERS] = {0};
+static keypos_t encoder_cw[ENCODERS]    = {{ 8, 5 }};
+static keypos_t encoder_ccw[ENCODERS]  = {{ 7, 5 }};
 
-    void encoder_action_unregister(void) {
-        for (int index = 0; index < ENCODERS; ++index) {
-            if (encoder_state[index]) {
-                keyevent_t encoder_event = (keyevent_t) {
-                    .key = encoder_state[index] >> 1 ? encoder_cw[index] : encoder_ccw[index],
-                    .pressed = false,
-                    .time = (timer_read() | 1)
-                };
-                encoder_state[index] = 0;
-                action_exec(encoder_event);
-            }
+void encoder_action_unregister(void) {
+    for (int index = 0; index < ENCODERS; ++index) {
+        if (encoder_state[index]) {
+            keyevent_t encoder_event = (keyevent_t) {
+                .key = encoder_state[index] >> 1 ? encoder_cw[index] : encoder_ccw[index],
+                .pressed = false,
+                .time = (timer_read() | 1)
+            };
+            encoder_state[index] = 0;
+            action_exec(encoder_event);
         }
     }
+}
 
-    void encoder_action_register(uint8_t index, bool clockwise) {
-        keyevent_t encoder_event = (keyevent_t) {
-            .key = clockwise ? encoder_cw[index] : encoder_ccw[index],
-            .pressed = true,
-            .time = (timer_read() | 1)
-        };
-        encoder_state[index] = (clockwise ^ 1) | (clockwise << 1);
-        action_exec(encoder_event);
-    }
-
-    void matrix_scan_user(void) {
-        encoder_action_unregister();
-    }
-
-    bool encoder_update_user(uint8_t index, bool clockwise) {
-        encoder_action_register(index, clockwise);
-        return false;
+void encoder_action_register(uint8_t index, bool clockwise) {
+    keyevent_t encoder_event = (keyevent_t) {
+        .key = clockwise ? encoder_cw[index] : encoder_ccw[index],
+        .pressed = true,
+        .time = (timer_read() | 1)
     };
+    encoder_state[index] = (clockwise ^ 1) | (clockwise << 1);
+    action_exec(encoder_event);
+}
+
+void matrix_scan_user(void) {
+    encoder_action_unregister();
+}
+
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    encoder_action_register(index, clockwise);
+    return false;
+};
 
 #endif
-
-    bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_MISSION_CONTROL:
+        case KC_LOPTN:
+        case KC_ROPTN:
+        case KC_LCMMD:
+        case KC_RCMMD:
+            if (record->event.pressed) {
+                register_code(mac_keycode[keycode - KC_LOPTN]);
+            } else {
+                unregister_code(mac_keycode[keycode - KC_LOPTN]);
+            }
+            return false;
+        case KC_MCTL:
             if (record->event.pressed) {
                 host_consumer_send(0x29F);
             } else {
                 host_consumer_send(0);
             }
             return false;  // Skip all further processing of this key
-        case KC_LAUNCHPAD:
+        case KC_LPAD:
             if (record->event.pressed) {
                 host_consumer_send(0x2A0);
             } else {
@@ -129,21 +159,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             }
             return false;  // Skip all further processing of this key
         case KC_TASK:
-            if (record->event.pressed) {
-                register_code(KC_LWIN);
-                register_code(KC_TAB);
-            } else {
-                unregister_code(KC_LWIN);
-                unregister_code(KC_TAB);
-            }
-            return false;  // Skip all further processing of this key
         case KC_FLXP:
             if (record->event.pressed) {
-                register_code(KC_LWIN);
-                register_code(KC_E);
+                for (uint8_t i = 0; i < key_comb_list[keycode - KC_TASK].len; i++) {
+                    register_code(key_comb_list[keycode - KC_TASK].keycode[i]);
+                }
             } else {
-                unregister_code(KC_LWIN);
-                unregister_code(KC_E);
+                for (uint8_t i = 0; i < key_comb_list[keycode - KC_TASK].len; i++) {
+                    unregister_code(key_comb_list[keycode - KC_TASK].keycode[i]);
+                }
             }
             return false;  // Skip all further processing of this key
         default:
