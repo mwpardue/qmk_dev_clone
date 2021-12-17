@@ -25,4 +25,4 @@
 // The number of LEDs connected
 #define DRIVER_LED_TOTAL 21
 
-//#define RGB_MATRIX_KEYPRESSES
+// #define RGB_MATRIX_KEYPRESSES

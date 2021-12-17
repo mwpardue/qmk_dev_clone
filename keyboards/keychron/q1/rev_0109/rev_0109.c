@@ -26,7 +26,6 @@ const matrix_row_t matrix_mask[] = {
 };
 
 #ifdef RGB_MATRIX_ENABLE
-
 const ckled2001_led __flash g_ckled2001_leds[DRIVER_LED_TOTAL] = {
 /* Refer to IS31 manual for these locations
  *   driver
@@ -150,7 +149,6 @@ led_config_t g_led_config = {
         4,    4,    4,                      4,                      4,    4,    4,    4,    4,    4,
     }
 };
-
 #endif
 
 #ifdef ENCODER_ENABLE
@@ -158,9 +156,9 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     if (!encoder_update_user(index, clockwise)) { return false; }
     if (index == 0) {
         if (clockwise) {
-            tap_code_delay(KC_VOLU, 10);
+            tap_code(KC_VOLU);
         } else {
-            tap_code_delay(KC_VOLD, 10);
+            tap_code(KC_VOLD);
         }
     }
     return true;

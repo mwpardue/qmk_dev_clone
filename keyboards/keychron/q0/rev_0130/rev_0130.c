@@ -15,6 +15,7 @@
  */
 
 #include "rev_0130.h"
+#include "test.c"
 
 #ifdef RGB_MATRIX_ENABLE
 led_config_t g_led_config = {

@@ -19,7 +19,7 @@
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x3434
 #define MANUFACTURER    Keychron
-#define PRODUCT         Keychron C3
+#define PRODUCT         Keychron V1
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -48,9 +48,6 @@
 #define BOOTMAGIC_LITE_ROW 5
 #define BOOTMAGIC_LITE_COLUMN 5
 
-/* Set USB polling rate as 1 milliseconds */
-#define USB_POLLING_INTERVAL_MS 1
-
 /* Set the maxium brightness as 190 in order to limit the current to 450mA */
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 190
 
@@ -69,3 +66,7 @@
 #define DISABLE_RGB_MATRIX_HUE_BREATHING
 #define DISABLE_RGB_MATRIX_HUE_PENDULUM
 #define DISABLE_RGB_MATRIX_HUE_WAVE
+
+/* Set USB polling rate as 1 milliseconds */
+#define USB_POLLING_INTERVAL_MS 1
+

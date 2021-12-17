@@ -43,7 +43,6 @@ enum custom_keycodes {
     KC_CORTANA
 };
 
-#define KC_WAVE S(KC_GRV)
 #define KC_MCTL KC_MISSION_CONTROL
 #define KC_LPAD KC_LAUNCHPAD
 #define KC_TASK KC_TASK_VIEW

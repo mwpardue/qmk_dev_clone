@@ -20,4 +20,6 @@
 
 #if   defined(KEYBOARD_keychron_q3_rev_0120)
 #    include "rev_0120.h"
+#elif defined(KEYBOARD_keychron_q3_rev_0121)
+#    include "rev_0121.h"
 #endif

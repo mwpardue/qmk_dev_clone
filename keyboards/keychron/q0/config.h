@@ -45,7 +45,7 @@
 #define NOP_FUDGE 0.4
 
 /* Only use 2 dynamic keymap layers */
-#define DYNAMIC_KEYMAP_LAYER_COUNT 2
+#define DYNAMIC_KEYMAP_LAYER_COUNT 3
 
 /* Disable a single effect */
 #define DISABLE_RGB_MATRIX_ALPHAS_MODS

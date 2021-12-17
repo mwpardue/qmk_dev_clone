@@ -16,41 +16,30 @@
 
 #include QMK_KEYBOARD_H
 
-enum layers {
-  _BASE,
-  _ADJUST
-};
+enum layers { _BASE, _FUNCTION, _RESERVED };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_BASE] = LAYOUT_numpad_6x4(
-      //,---------------------------------------|
-            KC_DEL,   KC_INS,  KC_PGUP,  KC_PGDN,
-      //|---------+---------+---------+---------|
-        KC_NUMLOCK,  KC_PSLS,  KC_PAST,  KC_PMNS,
-      //|---------+---------+---------+---------|
-             KC_P7,    KC_P8,    KC_P9,
-      //|---------+---------+---------+---------|
-             KC_P4,    KC_P5,    KC_P6,  KC_PPLS,
-      //|---------+---------+---------+---------|
-             KC_P1,    KC_P2,    KC_P3,
-      //|---------+---------+---------+---------|
-LT(_ADJUST, KC_P0),            KC_PDOT,  KC_PENT
-      //`---------------------------------------'
-  ),
+    [_BASE] = LAYOUT_numpad_6x4(
+        MO(_FUNCTION), KC_ESC,  KC_BSPACE, KC_TAB,
+        KC_NUMLOCK,    KC_PSLS, KC_PAST,   KC_PMNS,
+        KC_P7,         KC_P8,   KC_P9,
+        KC_P4,         KC_P5,   KC_P6,     KC_PPLS,
+        KC_P1,         KC_P2,   KC_P3,
+        KC_P0,                  KC_PDOT,   KC_PENT),
 
-    [_ADJUST] = LAYOUT_numpad_6x4(
-      //,---------------------------------------|
-           KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-      //|---------+---------+---------+---------|
-           KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-      //|---------+---------+---------+---------|
-           RGB_SAD,  RGB_SAI,  KC_TRNS,
-      //|---------+---------+---------+---------|
-           RGB_HUD,  RGB_HUI,  KC_TRNS,  RGB_TOG,
-      //|---------+---------+---------+---------|
-           RGB_VAD,  RGB_VAI,  KC_TRNS,
-      //|---------+---------+---------+---------|
-           KC_TRNS,            KC_TRNS,  RGB_MOD
-      //`---------------------------------------'
-  ),
+    [_FUNCTION] = LAYOUT_numpad_6x4(
+        KC_TRNS,  KC_MUTE, KC_VOLD, KC_VOLU,
+        RGB_MOD,  RGB_VAI, RGB_HUI, KC_DEL,
+        RGB_RMOD, RGB_VAD, RGB_HUD,
+        RGB_SAI,  RGB_SPI, KC_MPRV, KC_TRNS,
+        RGB_SAD,  RGB_SPD, KC_MPLY,
+        RGB_TOG,           KC_MNXT, KC_TRNS),
+
+    [_RESERVED] = LAYOUT_numpad_6x4(
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS,          KC_TRNS, KC_TRNS),
 };
