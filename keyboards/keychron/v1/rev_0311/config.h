@@ -17,8 +17,8 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define PRODUCT_ID      0x0330
-#define DEVICE_VER      0x0102
+#define PRODUCT_ID      0x0311
+#define DEVICE_VER      0x0103
 
 /* key matrix size */
 #define MATRIX_ROWS 6
@@ -33,5 +33,9 @@
 #define DRIVER_2_LED_TOTAL 37
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
-#define PHASE_CHANNEL MSKPHASE_9CHANNEL
+/* Encoder used pins */
+#define ENCODERS_PAD_A { A10 }
+#define ENCODERS_PAD_B { A8 }
+
+/* Specifies the number of pulses the encoder registers between each detent */
+#define ENCODER_RESOLUTION 4

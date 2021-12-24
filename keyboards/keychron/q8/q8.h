@@ -16,22 +16,10 @@
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define PRODUCT_ID      0x0121
-#define DEVICE_VER      0x0100
+#include "quantum.h"
 
-/* key matrix pins */
-#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-
-/* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 48
-#define DRIVER_2_LED_TOTAL 39
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
-
-/* Encoder used pins */
-#define ENCODERS_PAD_A { A10 }
-#define ENCODERS_PAD_B { A8 }
-
-/* Specifies the number of pulses the encoder registers between each detent */
-#define ENCODER_RESOLUTION 4
+#if   defined(KEYBOARD_keychron_q8_rev_0180)
+#    include "rev_0180.h"
+#elif defined(KEYBOARD_keychron_q8_rev_0181)
+#    include "rev_0181.h"
+#endif

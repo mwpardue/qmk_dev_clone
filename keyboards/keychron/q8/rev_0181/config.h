@@ -17,21 +17,19 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define PRODUCT_ID      0x0121
+#define PRODUCT_ID      0x0181
 #define DEVICE_VER      0x0100
 
-/* key matrix pins */
-#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 48
-#define DRIVER_2_LED_TOTAL 39
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+#define DRIVER_1_LED_TOTAL 52
+#define DRIVER_LED_TOTAL DRIVER_1_LED_TOTAL
+
+/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+#define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
 /* Encoder used pins */
-#define ENCODERS_PAD_A { A10 }
-#define ENCODERS_PAD_B { A8 }
+#define ENCODERS_PAD_A { B5 }
+#define ENCODERS_PAD_B { B4 }
 
 /* Specifies the number of pulses the encoder registers between each detent */
 #define ENCODER_RESOLUTION 4

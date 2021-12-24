@@ -14,14 +14,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "c3.h"
-#include "test.c"
+#pragma once
 
-bool dip_switch_update_kb(uint8_t index, bool active) {
-    if (!dip_switch_update_user(index, active)) { return false;}
-    if (index == 0) {
-        default_layer_set(1UL << (active ? 2 : 0));
-    }
-    return true;
-}
+/* USB Device descriptor parameter */
+#define PRODUCT_ID      0x0161
+#define DEVICE_VER      0x0100
 
+/* Key matrix size */
+#define MATRIX_ROWS 6
+#define MATRIX_COLS 20
+
+/* Key matrix pins */
+#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, A2, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, C14 }
+
+/* RGB Matrix Configuration */
+#define DRIVER_1_LED_TOTAL 60
+#define DRIVER_2_LED_TOTAL 48
+#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+/* Test LEDs */
+// #define RGB_MATRIX_KEYPRESSES
