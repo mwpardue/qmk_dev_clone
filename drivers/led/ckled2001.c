@@ -30,6 +30,8 @@
 #    define PHASE_CHANNEL MSKPHASE_12CHANNEL
 #endif
 
+static uint8_t constant_current_step[LED_CURRENT_TUNE_LENGTH];
+
 // Transfer buffer for TWITransmitData()
 uint8_t g_twi_transfer_buffer[20];
 
@@ -122,10 +124,25 @@ void CKLED2001_init(uint8_t addr) {
         CKLED2001_write_register(addr, i, 0x00);
     }
 
+    // Initial value of constant_current_step array
+    constant_current_step[0] = CONST_CURRENT_STEP_CB1;
+    constant_current_step[1] = CONST_CURRENT_STEP_CB2;
+    constant_current_step[2] = CONST_CURRENT_STEP_CB3;
+    constant_current_step[3] = CONST_CURRENT_STEP_CB4;
+    constant_current_step[4] = CONST_CURRENT_STEP_CB5;
+    constant_current_step[5] = CONST_CURRENT_STEP_CB6;
+    constant_current_step[6] = CONST_CURRENT_STEP_CB7;
+    constant_current_step[7] = CONST_CURRENT_STEP_CB8;
+    constant_current_step[8] = CONST_CURRENT_STEP_CB9;
+    constant_current_step[9] = CONST_CURRENT_STEP_CB10;
+    constant_current_step[10] = CONST_CURRENT_STEP_CB11;
+    constant_current_step[11] = CONST_CURRENT_STEP_CB12;
+
     // Set CURRENT PAGE (Page 4)
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, CURRENT_TUNE_PAGE);
     for (int i = 0; i < LED_CURRENT_TUNE_LENGTH; i++) {
-        CKLED2001_write_register(addr, i, 0xFF);
+        /* CKLED2001_write_register(addr, i, 0xFF); */
+        CKLED2001_write_register(addr, i, constant_current_step[i]);
     }
 
     // Enable LEDs ON/OFF

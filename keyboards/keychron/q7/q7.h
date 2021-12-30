@@ -16,11 +16,8 @@
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0190
-#define DEVICE_VER 0x0100
+#include "quantum.h"
 
-/* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 35
-#define DRIVER_2_LED_TOTAL 35
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+#if   defined(KEYBOARD_keychron_q7_rev_0170)
+#    include "rev_0170.h"
+#endif

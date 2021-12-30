@@ -134,6 +134,44 @@ void CKLED2001_shutdown(uint8_t addr);
 #define LED_CURRENT_TUNE_LAST_ADDR 0x0B
 #define LED_CURRENT_TUNE_LENGTH 0x0C
 
+// Function Register: Constant Current Control Reg
+#ifndef CONST_CURRENT_STEP_CB1
+#define CONST_CURRENT_STEP_CB1 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB2
+#define CONST_CURRENT_STEP_CB2 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB3
+#define CONST_CURRENT_STEP_CB3 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB4
+#define CONST_CURRENT_STEP_CB4 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB5
+#define CONST_CURRENT_STEP_CB5 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB6
+#define CONST_CURRENT_STEP_CB6 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB7
+#define CONST_CURRENT_STEP_CB7 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB8
+#define CONST_CURRENT_STEP_CB8 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB9
+#define CONST_CURRENT_STEP_CB9 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB10
+#define CONST_CURRENT_STEP_CB10 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB11
+#define CONST_CURRENT_STEP_CB11 0x80
+#endif
+#ifndef CONST_CURRENT_STEP_CB12
+#define CONST_CURRENT_STEP_CB12 0x80
+#endif
+
 #define A_1 0x00
 #define A_2 0x01
 #define A_3 0x02

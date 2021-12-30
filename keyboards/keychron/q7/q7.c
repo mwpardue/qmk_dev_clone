@@ -14,13 +14,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "q7.h"
+#include "test.c"
 
-/* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0190
-#define DEVICE_VER 0x0100
+const matrix_row_t matrix_mask[] = {
+    0b1111111111111111,
+    0b1111111111111111,
+    0b1111111111111111,
+    0b1111111111111111,
+    0b1111111111101111,
+};
 
-/* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 35
-#define DRIVER_2_LED_TOTAL 35
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+bool dip_switch_update_kb(uint8_t index, bool active) {
+    if (!dip_switch_update_user(index, active)) { return false;}
+    if (index == 0) {
+        default_layer_set(1UL << (active ? 1 : 0));
+    }
+    return true;
+}

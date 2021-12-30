@@ -19,18 +19,18 @@
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x3434
 #define MANUFACTURER    Keychron
-#define PRODUCT         Keychron Q9
+#define PRODUCT         Keychron Q4
+
+/* key matrix size */
+#define MATRIX_ROWS 5
+#define MATRIX_COLS 14
+
+/* key matrix pins */
+#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9 }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
-
-/* Key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 15
-
-/* Key matrix pins */
-#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
@@ -43,8 +43,28 @@
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
+/*
+ * CONST_CURRENT_STEP_CBx sets the value of Constant Current Step register(CCS)(the default is defined as 0x80 in CKLED2001.h).
+ * If CCS = 0, constant current control is disabled. The output current Iout is 0mA.
+ * If CCS = 1~3, constant source current Iout is 0.47mA.
+ * If CCS = 4~255, constant source current Iout is [Constant Current Step x 0.157]mA.
+ * For instance: when CCS = 204(0xCC), Iout is [204*0.157] = 32mA.
+ */
+#define CONST_CURRENT_STEP_CB1 0xFF
+#define CONST_CURRENT_STEP_CB2 0xFF
+#define CONST_CURRENT_STEP_CB3 0xFF
+#define CONST_CURRENT_STEP_CB4 0xFF
+#define CONST_CURRENT_STEP_CB5 0xFF
+#define CONST_CURRENT_STEP_CB6 0xFF
+#define CONST_CURRENT_STEP_CB7 0xFF
+#define CONST_CURRENT_STEP_CB8 0xFF
+#define CONST_CURRENT_STEP_CB9 0xFF
+#define CONST_CURRENT_STEP_CB10 0
+#define CONST_CURRENT_STEP_CB11 0
+#define CONST_CURRENT_STEP_CB12 0
+
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {4, 4} }
+#define DIP_SWITCH_MATRIX_GRID  { {4,4} }
 
 /* Bootmagic lite key */
 #define BOOTMAGIC_LITE_ROW 4
@@ -56,13 +76,13 @@
 /* NKRO */
 #define FORCE_NKRO
 
-/* Turn off effects when suspended */
+/* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* Set USB polling rate as 1 milliseconds */
 #define USB_POLLING_INTERVAL_MS 1
 
-/* Use 5 dynamic keymap layers */
+/* Set 5 dynamic keymap layers */
 #define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
 // RGB Matrix Animation modes. Explicitly enabled
