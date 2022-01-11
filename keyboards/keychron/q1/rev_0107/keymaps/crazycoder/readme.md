@@ -41,6 +41,8 @@ Please make sure to save any customizations you have made in VIA to a .json file
 
 ## Changelog:
 
+v1.0.1  January 11, 2022
+- 1000Hz polling rate
+
 v1.0.0  January 10, 2022
 - Initial merge of lalalademaxiya1 Q1 knob (STM32L432) and mkillewald (Q1 non-knob, atmega32u4) keymaps
-
