@@ -13,10 +13,10 @@
     {"name": "Right Cmd", "title": "Right Command in macOS", "shortName": "Right Command"},
     {"name": "Task View", "title": "Task View in windows", "shortName": "Task View"},
     {"name": "File Explorer", "title": "File Explorer in windows", "shortName": "File Explorer"},
-    {"name": "Caps light Tab", "title": "Caps Lock light Tab toggle", "shortName": "Caps light Tab"},
-    {"name": "Caps light alphas", "title": "Caps Lock light alphas toggle", "shortName": "Caps light alphas"},
-    {"name": "Fn light undefined RGB", "title": "Fn layer non-defined keys RGB toggle", "shortName": "Fn light undefined RGB"},
-    {"name": "Fn light defined", "title": "Fn layer defined keys static color toggle", "shortName": "Fn light defined"}
+    {"name": "Caps light Tab", "title": "Caps Lock light Tab toggle", "shortName": "Caps Tab"},
+    {"name": "Caps light alphas", "title": "Caps Lock light alphas toggle", "shortName": "Caps Alpha"},
+    {"name": "Fn light undef", "title": "Fn layer non-defined keys RGB toggle", "shortName": "Fn Undef"},
+    {"name": "Fn light def", "title": "Fn layer defined keys static color toggle", "shortName": "Fn Def"}
   ],
   "layouts": {
     "keymap": [
