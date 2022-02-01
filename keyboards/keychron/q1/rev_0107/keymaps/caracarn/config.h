@@ -22,7 +22,6 @@
 #    define FN_LAYER_COLOR RGB_ORANGE
 #endif
 
-#define USB_POLLING_INTERVAL_MS 1
 #define QMK_KEYS_PER_SCAN 12
 #define TAPPING_TERM 200
 #define TAPPING_TOGGLE 2
