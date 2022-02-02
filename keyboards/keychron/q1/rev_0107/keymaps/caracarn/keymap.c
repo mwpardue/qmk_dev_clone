@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,            KC_TRNS,
         KC_TRNS,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,            KC_TRNS,
         KC_TRNS,            KC_LTTOG, KC_LATOG, KC_TKTOG, KC_FCTOG,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,  KC_TRNS,
-        KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,  RGB_VAD,  RGB_VAI,            KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+        KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,  RGB_VAD,  RGB_VAI,            KC_TRNS,  TG(MAC_FN),   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
     [WIN_BASE] = LAYOUT_all(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,    KC_F12,   KC_SLEP,             KC_MUTE,
@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,            KC_TRNS,
         KC_TRNS,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,            KC_TRNS,
         KC_TRNS,            KC_LTTOG, KC_LATOG, KC_TKTOG, KC_FCTOG,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,             KC_TRNS,  KC_TRNS,
-        KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,  RGB_VAD,  RGB_VAI,            KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+        KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,  RGB_VAD,  RGB_VAI,            KC_TRNS,  TG(WIN_FN),   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 };
 
 #if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
