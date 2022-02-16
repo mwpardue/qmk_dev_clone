@@ -18,6 +18,7 @@
 
 #include "quantum.h"
 
+
 #define XXX KC_NO
 
 #define LAYOUT_all( \

@@ -58,6 +58,26 @@ void set_layer_rgb(uint8_t led_min, uint8_t led_max, int layer) {
     }
 }
 
+/* void set_layer_color(int layer) {
+    if (layer == 0) { return; }
+    for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+        HSV hsv = {
+            .h = pgm_read_byte(&ledmaps[layer][i][0]),
+            .s = pgm_read_byte(&ledmaps[layer][i][1]),
+            .v = pgm_read_byte(&ledmaps[layer][i][2]),
+        };
+        if (hsv.h || hsv.s || hsv.v) {
+            RGB rgb = hsv_to_rgb(hsv);
+            float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+            rgb_matrix_set_color(i, f * rgb.r, f * rgb.g, f * rgb.b);
+        } else if (layer != 1) {
+            // Only deactivate non-defined key LEDs at layers other than FN. Because at FN we have RGB adjustments and need to see them live.
+            // If the values are all false then it's a transparent key and deactivate LED at this layer
+            rgb_matrix_set_color(i, 0, 0, 0);
+        }
+    }
+} */
+
 void rgb_matrix_layers_enable() {
     dprintf("ledmaps are enabled\n");
     enabled = true;

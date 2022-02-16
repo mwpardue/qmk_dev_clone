@@ -20,33 +20,26 @@
 #ifdef RGB_MATRIX_LEDMAPS_ENABLED
 
 // no association keycode
-#    define XXX \
+#    define NOLED \
         { 0, 0, 0 }
 
 // clang-format off
 #   define RGB_MATRIX_LAYOUT_LEDMAP( \
-        ul1,   k13, k26, k36, k31, k33, k07, k63, k71, k76, ka6, ka7, ka3, ka5, k97,     k01,   ur1, \
-        ul2,   k16, k17, k27, k37, k47, k46, k56, k57, k67, k77, k87, k86, k66, ka1,     k65,   ur2, \
-        ul3,   k11, k10, k20, k30, k40, k41, k51, k50, k60, k70, k80, k81, k61, ka2,     k15,   ur3, \
-        ul4,   k21, k12, k22, k32, k42, k43, k53, k52, k62, k72, k82, k83,     ka4,      k25,   ur4, \
-        ul5,   k00, k14, k24, k34, k44, k45, k55, k54, k64, k74, k85,    k91,       k35, k75,   ur5, \
-        ul6,   k06,    k90,    k93,       k94,          k95,     k92, k04,     k03, k73, k05,   ur6 \
-    ) \
-    { \
-        k13, k16, k11, k21, k00, k06, k26, k17, \
-        k10, k12, k14, k90, k36, k27, k20, k22, \
-        k24, k93, k31, k37, k30, k32, k34, k33, \
-        k47, k40, k42, k44, k07, k46, k41, k43, \
-        k45, k94, k63, k56, k51, k53, k55, k71, \
-        k57, k50, k52, k54, k76, k67, k60, k62, \
-        k64, k95, ka6, k77, k70, k72, k74, k92, \
-        ka7, k87, k80, k82, k85, ka3, k86, k81, \
-        k83, k04, ka5, ul1, ur1, k97, ul2, ur2, \
-        k65, ul2, ur2, k15, ul3, ur3, k66, k05, \
-        ul3, ur3, k75, ul4, ur4, ka1, k25, ul5, \
-        ur5, k61, k91, ul6, ur6, ka2, k35, k03, \
-        ka4, k73 \
-    }
+    K00, K01,  K02, K03, K04, K05, K06, K07, K08, K09, K0A, K0B, K0C, K0D,      K0F, \
+    K10, K11,  K12, K13, K14, K15, K16, K17, K18, K19, K1A, K1B, K1C, K1D,      K1F, \
+    K20, K21,  K22, K23, K24, K25, K26, K27, K28, K29, K2A, K2B, K2C, K2D,      K2F, \
+    K30, K31,  K32, K33, K34, K35, K36, K37, K38, K39, K3A, K3B,      K3D,      K3F, \
+    K40,       K42, K43, K44, K45, K46, K47, K48, K49, K4A, K4B,      K4D, K4E,      \
+    K50, K51,  K52,                K56,                K5A, K5B, K5C, K5D, K5E, K5F  \
+) \
+ { \
+    K00, K01,  K02, K03, K04, K05, K06, K07, K08, K09, K0A, K0B,  K0C, K0D, NOLED, K0F, \
+    K10, K11,  K12, K13, K14, K15, K16, K17, K18, K19, K1A, K1B,  K1C, K1D, NOLED, K1F, \
+    K20, K21,  K22, K23, K24, K25, K26, K27, K28, K29, K2A, K2B,  K2C, K2D, NOLED, K2F, \
+    K30, K31,  K32, K33, K34, K35, K36, K37, K38, K39, K3A, K3B,  NOLED, K3D, NOLED, K3F, \
+    K40, NOLED,  K42, K43, K44, K45, K46, K47, K48, K49, K4A, K4B,  NOLED, K4D, K4E, NOLED, \
+    K50, K51,  K52, NOLED, NOLED, NOLED, K56, NOLED, NOLED, NOLED, K5A, K5B,  K5C, K5D, K5E, K5F  \
+}
 // clang-format on
 typedef uint8_t ledmap[DRIVER_LED_TOTAL][3];
 extern const ledmap ledmaps[];
