@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Mike Killewald
+/* Copyright 2021 Mikael Manukyan <arm.localhost@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,13 +13,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #pragma once
 #include QMK_KEYBOARD_H
+#include "rgb_matrix_ledmaps.h"
 
-// clang-format off
+enum layout_names {
+    MAC_BASE = 0,
+    MAC_FN,
+    WIN_BASE,
+    WIN_FN,
+    NAV,
+};
 
-// These are just to make it neater to use builtin HSV values in the keymap
 #define RED {HSV_RED}
 #define CORAL {HSV_CORAL}
 #define ORANGE {HSV_ORANGE}
@@ -37,20 +42,3 @@
 #define PURPLE {HSV_PURPLE}
 #define MAGENT {HSV_MAGENTA}
 #define PINK {HSV_PINK}
-
-enum layout_names {
-    MAC_BASE = 0,
-    MAC_FN,
-    WIN_BASE,
-    WIN_FN,
-    NAV
-};
-
-// clang-format on
-
-bool get_caps_lock_light_tab(void);
-bool get_caps_lock_light_alphas(void);
-// bool get_fn_layer_transparent_keys_off(void);
-// bool get_fn_layer_color_enable(void);
-extern rgb_config_t rgb_matrix_config;
-bool disable_layer_color;

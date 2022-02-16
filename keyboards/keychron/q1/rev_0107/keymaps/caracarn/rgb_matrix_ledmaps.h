@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Mike Killewald
+/* Copyright 2021 Mikael Manukyan <arm.localhost@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,17 +13,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #pragma once
 
-void rgb_matrix_init_user(void);
+#include "quantum.h"
 
-void rgb_matrix_set_color_by_keycode(uint8_t led_min, uint8_t led_max, uint8_t layer, bool (*is_keycode)(uint16_t), uint8_t red, uint8_t green, uint8_t blue);
+//#ifdef RGB_MATRIX_LEDMAPS_ENABLED
 
-bool is_caps_lock_indicator(uint16_t keycode);
-bool is_transparent(uint16_t keycode);
-bool is_not_transparent(uint16_t keycode);
-
+// no association keycode
 #    define NOLED \
         { 0, 0, 0 }
 
@@ -44,3 +40,35 @@ bool is_not_transparent(uint16_t keycode);
     { K40, NOLED, K42, K43, K44, K45, K46, K47, K48, K49, K4A, K4B,  NOLED, K4D, K4E, NOLED }, \
     { K50, K51, K52, NOLED, NOLED, NOLED, K56, K57, K58, NOLED, K5A, K5B,  K5C, K5D, K5E, K5F }  \
   }
+// clang-format on
+typedef uint8_t ledmap[DRIVER_LED_TOTAL][3];
+extern const ledmap ledmaps[];
+
+void set_layer_rgb(uint8_t led_min, uint8_t led_max, int layer);
+
+void rgb_matrix_layers_enable(void);
+void rgb_matrix_layers_disable(void);
+
+// Just a handy defines to make our ledmaps look better
+#define RED {HSV_RED}
+#define CORAL {HSV_CORAL}
+#define ORANGE {HSV_ORANGE}
+#define GOLDEN {HSV_GOLDENROD}
+#define GOLD {HSV_GOLD}
+#define YELLOW {HSV_YELLOW}
+#define CHART {HSV_CHARTREUSE}
+#define GREEN {HSV_GREEN}
+#define SPRING {HSV_SPRINGGREEN}
+#define TURQ {HSV_TURQUOISE}
+#define TEAL {HSV_TEAL}
+#define CYAN {HSV_CYAN}
+#define AZURE {HSV_AZURE}
+#define BLUE {HSV_BLUE}
+#define PURPLE {HSV_PURPLE}
+#define MAGENT {HSV_MAGENTA}
+#define PINK {HSV_PINK}
+
+//#endif  // RGB_MATRIX_LEDMAPS_ENABLED
+
+void rgb_matrix_indicators_keymap(void);
+void rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max);
