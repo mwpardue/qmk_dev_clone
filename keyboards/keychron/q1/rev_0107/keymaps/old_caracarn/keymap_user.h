@@ -37,3 +37,20 @@
 #define PURPLE {HSV_PURPLE}
 #define MAGENT {HSV_MAGENTA}
 #define PINK {HSV_PINK}
+
+enum layout_names {
+    MAC_BASE = 0,
+    MAC_FN,
+    WIN_BASE,
+    WIN_FN,
+    NAV
+};
+
+// clang-format on
+
+bool get_caps_lock_light_tab(void);
+bool get_caps_lock_light_alphas(void);
+// bool get_fn_layer_transparent_keys_off(void);
+// bool get_fn_layer_color_enable(void);
+extern rgb_config_t rgb_matrix_config;
+bool disable_layer_color;
